@@ -8,7 +8,7 @@ function TableHeader(props) {
   ];
 
   return (
-    <thead>
+    <thead className='thead-light'>
       <tr>
         { headers }
       </tr>

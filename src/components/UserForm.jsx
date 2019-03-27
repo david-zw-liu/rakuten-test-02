@@ -31,26 +31,31 @@ class UserForm extends Component {
 
   render() {
     const { name, phone, email } = this.state;
-    const { onCancel } = this.props; 
+    const { user, onCancel } = this.props; 
+    const titleText = user ? 'Edit user' : 'New user';
 
     return (
-      <form className="user-edit-form" onSubmit={this.onSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} onChange={this.onChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
-          <input type="text" name="phone" value={phone} onChange={this.onChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" value={email} onChange={this.onChange} />
-        </div>
-        <div className="form-group">
-          <button>Submit</button><button type="button" onClick={onCancel}>Cancel</button>
-        </div>
-      </form>
+      <div class="user-form">
+        <h2>{ titleText }</h2>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input className="form-control" type="text" name="name" value={name} onChange={this.onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone</label>
+            <input className="form-control"type="text" name="phone" value={phone} onChange={this.onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input className="form-control" type="email" name="email" value={email} onChange={this.onChange} />
+          </div>
+          <div className="form-group">
+            <button class="btn btn-primary btn-sm mr-1">Submit</button>
+            <button class="btn btn-light btn-sm" type="button" onClick={onCancel}>Cancel</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

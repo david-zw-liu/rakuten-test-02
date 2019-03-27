@@ -5,7 +5,7 @@ import TableBody from './TableBody';
 function DataTable (props) {
   const { data, columns } = props;
   return (
-    <table>
+    <table className="table">
       <TableHeader columns={columns} />
       <TableBody data={data} columns={columns} />
     </table>
