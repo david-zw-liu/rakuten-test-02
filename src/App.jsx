@@ -45,6 +45,7 @@ class App extends Component {
       isFormOpen: false,
     };
 
+    this.createUser = this.createUser.bind(this);
     this.saveUser = this.saveUser.bind(this);
     this.closeForm = this.closeForm.bind(this);
   }
@@ -54,6 +55,10 @@ class App extends Component {
       const editingUser = users.find(({ name }) => name === targetName);
       return { editingUser, isFormOpen: true }
     })
+  }
+
+  createUser() {
+    this.setState({ editingUser: null, isFormOpen: true })
   }
 
   destoryUser(targetName) {
@@ -66,10 +71,14 @@ class App extends Component {
 
   saveUser(newUser) {
     this.setState(({ users, editingUser }) => {
-      const userIdx = users.findIndex(({ name }) => name === editingUser.name);
-      users[userIdx] = newUser;
+      if (editingUser) {
+        const userIdx = users.findIndex(({ name }) => name === editingUser.name);
+        users[userIdx] = newUser;
 
-      return { users, editingUser: null, isFormOpen: false }
+        return { users, editingUser: null, isFormOpen: false }
+      }
+
+      return { users: [...users, newUser], editingUser: null, isFormOpen: false }
     })
   }
 
@@ -102,6 +111,7 @@ class App extends Component {
         <div className="row">
           <div className="col">
             <h1 className="my-3">Users List</h1>
+            <button className="btn btn-success btn-sm my-3" onClick={this.createUser}>Add user</button>
             <DataTable data={users} columns={columns} />
             { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} user={editingUser} /> }
           </div>
