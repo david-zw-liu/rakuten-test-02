@@ -7,32 +7,32 @@ const defualtUsers = [
   {
     "name": "蒼怡君",
     "email": "walter@shields.name",
-    "phone": "(661) 746-7368"
+    "phone": "02-1234567"
   },
   {
     "name": "饒靜宜",
     "email": "alysha.moore@goodwinnicolas.io",
-    "phone": "1-508-503-2347"
+    "phone": "02-1234567"
   },
   {
     "name": "晁淑婷",
     "email": "verna@reichert.biz",
-    "phone": "153-320-0953"
+    "phone": "02-1234567"
   },
   {
     "name": "邴佩蓉",
     "email": "dario_grady@gutkowski.net",
-    "phone": "1-958-467-3775"
+    "phone": "02-1234567"
   },
   {
     "name": "司空淑萍",
     "email": "zella_harris@mosciski.co",
-    "phone": "437-451-8117"
+    "phone": "02-1234567"
   },
   {
     "name": "習慧玲",
     "email": "bell@cole.name",
-    "phone": "(253) 283-6854"
+    "phone": "02-1234567"
   }
 ];
 
@@ -117,7 +117,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} users={users} user={editingUser} /> }
+        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} users={users} editingUser={editingUser} /> }
       </>
     );
   }
