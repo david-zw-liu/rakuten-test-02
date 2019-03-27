@@ -2,7 +2,10 @@ import React from 'react';
 
 function TableHeader(props) {
   const { columns } = props;
-  const headers = columns.map(({ name }) => <th key={name}>{name}</th>);
+  const headers = [
+    <th key="no">No.</th>,
+    ...columns.map(({ name }) => <th key={name}>{name}</th>)
+  ];
 
   return (
     <thead>
