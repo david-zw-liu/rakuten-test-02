@@ -98,8 +98,8 @@ class App extends Component {
         transform: ({ name }) => {
           return (
             <>
-              <button class="btn btn-info btn-sm mr-1" onClick={() => this.editUser(name)}>Edit</button>
-              <button class="btn btn-danger btn-sm" onClick={() => this.destoryUser(name)}>Destroy</button>
+              <button className="btn btn-info btn-sm mr-1" onClick={() => this.editUser(name)}>Edit</button>
+              <button className="btn btn-danger btn-sm" onClick={() => this.destoryUser(name)}>Destroy</button>
             </>
           );
         }
@@ -117,7 +117,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} user={editingUser} /> }
+        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} users={users} user={editingUser} /> }
       </>
     );
   }
