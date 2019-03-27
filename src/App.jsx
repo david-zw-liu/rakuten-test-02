@@ -43,11 +43,13 @@ class App extends Component {
       users: [...defualtUsers],
       editingUser: null,
       isFormOpen: false,
+      searchText: '',
     };
 
     this.createUser = this.createUser.bind(this);
     this.saveUser = this.saveUser.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   editUser(targetName) {
@@ -86,8 +88,28 @@ class App extends Component {
     this.setState({ editingUser: null, isFormOpen: false });
   }
 
+  onChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({ [name]: value });
+  }
+
+  filteredUsers() {
+    const { users, searchText } = this.state;
+    let filteredUsers = users;
+    if (searchText !== '') {
+      filteredUsers = users.filter((user) => {
+        return Object.values(user).some((value) => value.toString().indexOf(searchText) > -1)
+      })
+    }
+    return filteredUsers;
+  }
+
   render() {
     const { isFormOpen, editingUser, users } = this.state;
+    const filteredUsers = this.filteredUsers();
     const columns = [
       { name: 'Name', key: 'name' },
       { name: 'Phone', key: 'phone' },
@@ -112,8 +134,17 @@ class App extends Component {
           <div className="row">
             <div className="col">
               <h1 className="my-3">Users List</h1>
-              <button className="btn btn-success btn-sm my-3" onClick={this.createUser}>Add user</button>
-              <DataTable data={users} columns={columns} />
+              <div className="row justify-content-between px-3 mb-1">
+                <button className="btn btn-success btn-sm" onClick={this.createUser}>Add user</button>
+                <input type="text"
+                       className="form-control form-control-sm w-25"
+                       placeholder="Search"
+                       name="searchText"
+                       onChange={this.onChange}
+                />
+              </div>
+              
+              <DataTable data={filteredUsers} columns={columns} />
             </div>
           </div>
         </div>
