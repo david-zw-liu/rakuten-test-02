@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import DataTable from './components/DataTable';
-import './App.sass';
 import UserForm from './components/UserForm';
+
+import './App.sass';
 
 const defualtUsers = [
   {
