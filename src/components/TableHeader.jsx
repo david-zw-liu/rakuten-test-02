@@ -2,7 +2,7 @@ import React from 'react';
 
 function TableHeader(props) {
   const { columns } = props;
-  const headers = [
+  const ths = [
     <th key="no">No.</th>,
     ...columns.map(({ name }) => <th key={name}>{name}</th>)
   ];
@@ -10,7 +10,7 @@ function TableHeader(props) {
   return (
     <thead className='thead-light'>
       <tr>
-        { headers }
+        { ths }
       </tr>
     </thead>
   )
