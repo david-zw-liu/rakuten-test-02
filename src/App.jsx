@@ -107,16 +107,18 @@ class App extends Component {
     ];
 
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h1 className="my-3">Users List</h1>
-            <button className="btn btn-success btn-sm my-3" onClick={this.createUser}>Add user</button>
-            <DataTable data={users} columns={columns} />
-            { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} user={editingUser} /> }
+      <>
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <h1 className="my-3">Users List</h1>
+              <button className="btn btn-success btn-sm my-3" onClick={this.createUser}>Add user</button>
+              <DataTable data={users} columns={columns} />
+            </div>
           </div>
         </div>
-      </div>
+        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} user={editingUser} /> }
+      </>
     );
   }
 }
