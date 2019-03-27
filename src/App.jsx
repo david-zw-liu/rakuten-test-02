@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DataTable from './components/DataTable';
 import './App.sass';
+import UserForm from './components/UserForm';
 
 const defualtUsers = [
   {
@@ -39,12 +40,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [...defualtUsers]
+      users: [...defualtUsers],
+      editingUser: null,
+      isFormOpen: false,
     };
+
+    this.saveUser = this.saveUser.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
-  editUser(name) {
-    throw 'Not Implemented.'
+  editUser(targetName) {
+    this.setState(({ users }) => {
+      const editingUser = users.find(({ name }) => name === targetName);
+      return { editingUser, isFormOpen: true }
+    })
   }
 
   destoryUser(targetName) {
@@ -55,8 +64,21 @@ class App extends Component {
     })
   }
 
+  saveUser(newUser) {
+    this.setState(({ users, editingUser }) => {
+      const userIdx = users.findIndex(({ name }) => name === editingUser.name);
+      users[userIdx] = newUser;
+
+      return { users, editingUser: null, isFormOpen: false }
+    })
+  }
+
+  closeForm() {
+    this.setState({ editingUser: null, isFormOpen: false });
+  }
+
   render() {
-    const { users } = this.state;
+    const { isFormOpen, editingUser, users } = this.state;
     const columns = [
       { name: 'Name', key: 'name' },
       { name: 'Phone', key: 'phone' },
@@ -79,6 +101,7 @@ class App extends Component {
       <div className="App">
         <h1>Users List</h1>
         <DataTable data={users} columns={columns} />
+        { isFormOpen && <UserForm onSubmit={this.saveUser} onCancel={this.closeForm} user={editingUser} /> }
       </div>
     );
   }
